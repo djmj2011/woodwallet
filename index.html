@@ -71,18 +71,32 @@
                     </div>
                 </div>
 
-                <!-- Hero Right Image Card -->
+                <!-- Hero Right Image Card with View Angle Controls -->
                 <div class="lg:col-span-6">
-                    <div class="relative rounded-3xl p-3 bg-gradient-to-b from-stone-800/80 to-stone-900/80 border border-stone-800 shadow-2xl shadow-black">
+                    <div class="relative rounded-3xl p-3 bg-gradient-to-b from-stone-800/80 to-stone-900/80 border border-stone-800 shadow-2xl shadow-black space-y-3">
                         <div class="overflow-hidden rounded-2xl bg-stone-900 aspect-4/3 relative">
-                            <img id="main-product-img" src="images/wallet.jpg" alt="3D Printed Wood Wallet" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500">
+                            <img id="main-product-img" src="images/hero_front.png" alt="3D Printed Wood Wallet Front View" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500">
+                            
                             <div class="absolute bottom-4 left-4 right-4 bg-stone-950/80 backdrop-blur-md p-4 rounded-xl border border-stone-800 flex justify-between items-center">
                                 <div>
-                                    <div class="text-xs text-amber-500 font-semibold uppercase tracking-wider">Active Preset</div>
-                                    <div id="preset-label" class="text-sm font-bold text-white">Walnut Wood Composite</div>
+                                    <div class="text-xs text-amber-500 font-semibold uppercase tracking-wider">Active View & Finish</div>
+                                    <div id="preset-label" class="text-sm font-bold text-white">Front View · Walnut Composite</div>
                                 </div>
                                 <div id="preset-price" class="text-lg font-extrabold text-amber-400">$39.00</div>
                             </div>
+                        </div>
+
+                        <!-- 3 Angle Selector Tabs -->
+                        <div class="grid grid-cols-3 gap-2">
+                            <button data-angle="front" class="angle-btn py-2 px-3 rounded-xl bg-amber-600 text-white text-xs font-semibold text-center border border-amber-500 transition-all cursor-pointer">
+                                Front View
+                            </button>
+                            <button data-angle="back" class="angle-btn py-2 px-3 rounded-xl bg-stone-900 text-stone-300 hover:bg-stone-800 text-xs font-semibold text-center border border-stone-800 transition-all cursor-pointer">
+                                Back View
+                            </button>
+                            <button data-angle="open" class="angle-btn py-2 px-3 rounded-xl bg-stone-900 text-stone-300 hover:bg-stone-800 text-xs font-semibold text-center border border-stone-800 transition-all cursor-pointer">
+                                Open View
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -120,7 +134,7 @@
         </div>
     </section>
 
-    <!-- TECHNICAL 3D PRINTING SPECS GRID -->
+    <!-- TECHNICAL SPECS GRID -->
     <section id="specs" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -158,26 +172,31 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Product Gallery</h2>
-                <p class="mt-4 text-stone-400">Take a closer look at the 3D-printed wood grain and clean mechanical finish.</p>
+                <p class="mt-4 text-stone-400">Explore all three angles: Front face, rear money clip, and internal open view.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <div class="gallery-item group relative overflow-hidden rounded-2xl bg-stone-900 border border-stone-800 aspect-square cursor-pointer" data-img="images/wallet.jpg">
-                    <img src="images/wallet.jpg" alt="Wallet Close-up" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <!-- Front View Card -->
+                <div class="gallery-item group relative overflow-hidden rounded-2xl bg-stone-900 border border-stone-800 aspect-square cursor-pointer" data-img="images/hero_front.png">
+                    <img src="images/hero_front.png" alt="Front View" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                        <span class="text-sm font-semibold text-white">Wood Filament Grain Detail</span>
+                        <span class="text-sm font-semibold text-white">Front Face & Wood Grain</span>
                     </div>
                 </div>
-                <div class="gallery-item group relative overflow-hidden rounded-2xl bg-stone-900 border border-stone-800 aspect-square cursor-pointer" data-img="images/wallet.jpg">
-                    <img src="images/wallet.jpg" alt="Card Slot View" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+
+                <!-- Back View Card -->
+                <div class="gallery-item group relative overflow-hidden rounded-2xl bg-stone-900 border border-stone-800 aspect-square cursor-pointer" data-img="images/hero_back.png">
+                    <img src="images/hero_back.png" alt="Back View" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                        <span class="text-sm font-semibold text-white">Card Insertion Angle</span>
+                        <span class="text-sm font-semibold text-white">Back View & Pocket Clip</span>
                     </div>
                 </div>
-                <div class="gallery-item group relative overflow-hidden rounded-2xl bg-stone-900 border border-stone-800 aspect-square cursor-pointer" data-img="images/wallet.jpg">
-                    <img src="images/wallet.jpg" alt="Side Profile" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+
+                <!-- Open View Card -->
+                <div class="gallery-item group relative overflow-hidden rounded-2xl bg-stone-900 border border-stone-800 aspect-square cursor-pointer" data-img="images/hero_open.png">
+                    <img src="images/hero_open.png" alt="Open View" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                        <span class="text-sm font-semibold text-white">Slim Profile View</span>
+                        <span class="text-sm font-semibold text-white">Open Chamber Mechanism</span>
                     </div>
                 </div>
             </div>
