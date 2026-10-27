@@ -3,174 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TimberVault | 3D Printed Wood Filament Wallet</title>
-    
-    <!-- Google Fonts -->
+    <title>TimberVault | 3D Printed Wood Wallet with RFID Protection</title>
+    <meta name="description" content="A slim, 42 g card wallet 3D printed in wood-fiber composite. Choose walnut, golden birch or ebony. RFID-blocking, holds 1–8 cards plus cash.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    
-    <!-- Custom CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/styles.css">
-    
-    <!-- Custom JavaScript -->
     <script src="js/script.js" defer></script>
 </head>
-<body class="bg-stone-950 text-stone-100 antialiased selection:bg-amber-700 selection:text-white">
+<body>
+    <a class="skip" href="#main">Skip to content</a>
 
-    <!-- HEADER / NAVBAR -->
-    <header class="sticky top-0 z-50 bg-stone-950/80 backdrop-blur-md border-b border-stone-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-700 to-amber-900 flex items-center justify-center shadow-lg shadow-amber-950/50">
-                    <svg class="w-6 h-6 text-amber-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                </div>
-                <span class="text-xl font-bold tracking-tight text-amber-50">Timber<span class="text-amber-600">Vault</span></span>
-            </div>
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-stone-300">
-                <a href="#features" class="hover:text-amber-500 transition-colors">Features</a>
-                <a href="#specs" class="hover:text-amber-500 transition-colors">3D Print Specs</a>
-                <a href="#gallery" class="hover:text-amber-500 transition-colors">Gallery</a>
-                <a href="#order" class="bg-amber-700 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-amber-900/30">Order Now</a>
+    <header class="site-header">
+        <div class="wrap bar">
+            <a href="#" class="logo" aria-label="TimberVault home">Timber<span>Vault</span></a>
+            <button class="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
+            <nav class="nav" id="site-nav" aria-label="Main">
+                <a href="#finishes">Finishes</a>
+                <a href="#specs">Specs</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#faq">FAQ</a>
+                <a href="#order" class="btn btn-primary btn-sm">Order now</a>
             </nav>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-32">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-900/20 via-stone-950/0 to-stone-950 pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-                
-                <!-- Hero Left Content -->
-                <div class="lg:col-span-6 space-y-6">
-                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-950/60 border border-amber-800/50 text-amber-400 text-xs font-semibold tracking-wider uppercase">
-                        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-                        <span>Eco Wood Filament 3D Printed</span>
+    <main id="main">
+        <section class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <h1>A slim wallet printed from real wood fiber</h1>
+                    <p class="lede">TimberVault is a 42 g card wallet 3D printed in a wood-fiber composite. It has the grain and scent of timber, blocks RFID skimming, and slips into any pocket.</p>
+                    <div class="cta-row">
+                        <a href="#order" class="btn btn-primary">Order for $39</a>
+                        <a href="#specs" class="btn btn-ghost">See the specs</a>
                     </div>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                        The Future of EDC is <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-amber-400">Natural Wood.</span>
-                    </h1>
-                    <p class="text-lg text-stone-400 leading-relaxed">
-                        Precision-crafted using advanced 3D printing with real wood-infused composite filament. Combining organic timber texture, RFID protection, and featherlight durability.
-                    </p>
-                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
-                        <a href="#order" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold px-8 py-4 rounded-xl text-center transition-all shadow-xl shadow-amber-900/40">
-                            Customize & Order ($39.00)
-                        </a>
-                        <a href="#specs" class="bg-stone-900 hover:bg-stone-800 border border-stone-800 text-stone-200 font-medium px-6 py-4 rounded-xl text-center transition-all">
-                            View Technical Specs
-                        </a>
-                    </div>
-                    <div class="flex items-center space-x-6 pt-6 text-sm text-stone-400 border-t border-stone-900">
-                        <div>✨ Genuine Wood Scent & Texture</div>
-                        <div>🔒 Secure RFID Block</div>
-                    </div>
+                    <ul class="trust">
+                        <li>RFID-blocking</li>
+                        <li>Holds 1–8 cards plus cash</li>
+                        <li>Made to order</li>
+                    </ul>
                 </div>
 
-                <!-- Hero Right Image Card with View Angle Controls -->
-                <div class="lg:col-span-6">
-                    <div class="relative rounded-3xl p-3 bg-gradient-to-b from-stone-800/80 to-stone-900/80 border border-stone-800 shadow-2xl shadow-black space-y-3">
-                        <div class="overflow-hidden rounded-2xl bg-stone-900 aspect-4/3 relative">
-                            <img id="main-product-img" src="images/hero_closed.png" alt="3D Printed Wood Wallet Closed View" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500">
-                            
-                            <div class="absolute bottom-4 left-4 right-4 bg-stone-950/80 backdrop-blur-md p-4 rounded-xl border border-stone-800 flex justify-between items-center">
-                                <div>
-                                    <div class="text-xs text-amber-500 font-semibold uppercase tracking-wider">Active View & Finish</div>
-                                    <div id="preset-label" class="text-sm font-bold text-white">Closed View · Walnut Composite</div>
-                                </div>
-                                <div id="preset-price" class="text-lg font-extrabold text-amber-400">$39.00</div>
+                <div class="stage">
+                    <div class="stage-img">
+                        <img id="main-product-img" src="images/hero_closed.png" alt="TimberVault wood composite wallet" width="800" height="600">
+                    </div>
+                    <div class="stage-caption">
+                        <strong id="preset-label">Closed view, Walnut Blend</strong>
+                        <span id="preset-price">$39.00</span>
+                    </div>
+                    <div class="tabs" role="group" aria-label="Product view">
+                        <button class="tab angle-btn" data-angle="closed" aria-pressed="true">Closed</button>
+                        <button class="tab angle-btn" data-angle="back" aria-pressed="false">Back</button>
+                        <button class="tab angle-btn" data-angle="open" aria-pressed="false">Open</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="finishes" class="section section-alt">
+            <div class="wrap">
+                <h2>Choose your finish</h2>
+                <p class="lede">Each finish is printed in a PLA and wood-fiber composite. Select one and the preview above updates.</p>
+                <div class="finishes" role="group" aria-label="Wood finish">
+                    <button class="finish finish-btn" data-finish="walnut" aria-pressed="true">
+                        <div class="swatch" style="background:#5a3a22"></div>
+                        <h3>Walnut Blend</h3>
+                        <p>Deep, dark grain with a satin feel.</p>
+                        <span class="price">$39</span>
+                    </button>
+                    <button class="finish finish-btn" data-finish="birch" aria-pressed="false">
+                        <div class="swatch" style="background:#e3c08a"></div>
+                        <h3>Golden Birch</h3>
+                        <p>Light, warm tone with a pale grain.</p>
+                        <span class="price">$39</span>
+                    </button>
+                    <button class="finish finish-btn" data-finish="ebony" aria-pressed="false">
+                        <div class="swatch" style="background:#1f1b18"></div>
+                        <h3>Ebony Timber</h3>
+                        <p>Near-black, carbonized look.</p>
+                        <span class="price">$42</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="specs" class="section">
+            <div class="wrap specs-grid">
+                <div>
+                    <h2>Built to carry every day</h2>
+                    <p class="lede">A dense 40% grid infill and fine 0.16 mm layers keep the wallet rigid without adding bulk.</p>
+                </div>
+                <dl class="specs">
+                    <div><dt>Dimensions</dt><dd>95 × 62 × 12 mm</dd></div>
+                    <div><dt>Weight</dt><dd>42 g</dd></div>
+                    <div><dt>Material</dt><dd>PLA and wood-fiber composite (up to 40% recycled fiber)</dd></div>
+                    <div><dt>Print settings</dt><dd>0.16 mm layer height, 40% grid infill</dd></div>
+                    <div><dt>Capacity</dt><dd>1–8 cards, plus cash with the elastic strap</dd></div>
+                    <div><dt>Protection</dt><dd>RFID-blocking</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <section id="gallery" class="section section-alt">
+            <div class="wrap">
+                <h2>See it from every angle</h2>
+                <p class="lede">Select a photo to enlarge it.</p>
+                <div class="gallery">
+                    <button class="shot" data-img="images/hero_closed.png"><div class="frame"><img src="images/hero_closed.png" alt="Wallet closed" loading="lazy"></div><span>Closed face and wood grain</span></button>
+                    <button class="shot" data-img="images/hero_back.png"><div class="frame"><img src="images/hero_back.png" alt="Wallet back" loading="lazy"></div><span>Back and pocket clip</span></button>
+                    <button class="shot" data-img="images/hero_open.png"><div class="frame"><img src="images/hero_open.png" alt="Wallet open" loading="lazy"></div><span>Open card chamber</span></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="order" class="section">
+            <div class="wrap">
+                <h2>Order your TimberVault</h2>
+                <p class="lede">Send your order request and we will email you to confirm payment and shipping.</p>
+                <div class="order-grid">
+                    <form action="process_order.php" method="POST" class="form">
+                        <div class="row">
+                            <div><label for="name">Full name</label><input type="text" id="name" name="name" autocomplete="name" required></div>
+                            <div><label for="email">Email address</label><input type="email" id="email" name="email" autocomplete="email" required></div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <label for="order-finish-select">Finish</label>
+                                <select id="order-finish-select" name="finish">
+                                    <option value="walnut">Walnut Blend ($39)</option>
+                                    <option value="birch">Golden Birch ($39)</option>
+                                    <option value="ebony">Ebony Timber ($42)</option>
+                                </select>
                             </div>
+                            <div><label for="quantity">Quantity</label><input type="number" id="quantity" name="quantity" min="1" max="10" value="1"></div>
                         </div>
-
-                        <!-- 3 Angle Selector Tabs -->
-                        <div class="grid grid-cols-3 gap-2">
-                            <button data-angle="closed" class="angle-btn py-2 px-3 rounded-xl bg-amber-600 text-white text-xs font-semibold text-center border border-amber-500 transition-all cursor-pointer">
-                                Closed View
-                            </button>
-                            <button data-angle="back" class="angle-btn py-2 px-3 rounded-xl bg-stone-900 text-stone-300 hover:bg-stone-800 text-xs font-semibold text-center border border-stone-800 transition-all cursor-pointer">
-                                Back View
-                            </button>
-                            <button data-angle="open" class="angle-btn py-2 px-3 rounded-xl bg-stone-900 text-stone-300 hover:bg-stone-800 text-xs font-semibold text-center border border-stone-800 transition-all cursor-pointer">
-                                Open View
-                            </button>
+                        <div>
+                            <label for="address">Shipping address</label>
+                            <textarea id="address" name="address" rows="3" autocomplete="street-address" placeholder="Street, city, state or province, postal code, country" required></textarea>
                         </div>
-                    </div>
-                </div>
+                        <button type="submit" class="btn btn-primary">Send order request</button>
+                    </form>
 
+                    <aside class="summary" aria-live="polite">
+                        <h3>Order summary</h3>
+                        <div class="line"><span id="sum-item">Walnut Blend × 1</span></div>
+                        <div class="line"><span>Shipping</span><span>Confirmed by email</span></div>
+                        <div class="line total"><span>Total</span><span id="sum-total">$39.00</span></div>
+                        <p class="note">You will not be charged until we confirm your order.</p>
+                    </aside>
+                </div>
             </div>
+        </section>
+
+        <section id="faq" class="section section-alt">
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details><summary>Is it real wood?</summary><p>It is a composite of PLA plastic and recycled wood fiber, so it prints with the look, texture and scent of wood. It is not solid timber.</p></details>
+                    <details><summary>Will it block RFID skimming?</summary><p>Yes. The wallet is designed to block RFID signals from cards held inside it.</p></details>
+                    <details><summary>How long does an order take?</summary><p>Each wallet is printed to order. We will confirm the lead time and shipping cost by email when we review your request.</p></details>
+                    <details><summary>How many cards does it hold?</summary><p>Between 1 and 8 cards, plus folded cash under the elastic strap.</p></details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="foot">
+                <div><div class="logo">Timber<span>Vault</span></div><p style="margin-top:8px">3D printed wood composite wallets.</p></div>
+                <ul><li><a href="#finishes">Finishes</a></li><li><a href="#specs">Specs</a></li><li><a href="#order">Order</a></li></ul>
+            </div>
+            <p class="legal">&copy; 2026 TimberVault. All rights reserved.</p>
         </div>
-    </section>
+    </footer>
 
-    <!-- INTERACTIVE WOOD FINISH CUSTOMIZER -->
-    <section id="features" class="py-20 bg-stone-900/50 border-y border-stone-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Select Your Wood Filament Finish</h2>
-                <p class="mt-4 text-stone-400">Choose your preferred timber aesthetic. Each option is 3D printed with specialty PLAwood composite containing up to 40% recycled wood fibers.</p>
-            </div>
-
-            <!-- Finish Selection Buttons -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
-                <button data-finish="walnut" id="btn-walnut" class="finish-btn p-5 rounded-2xl bg-stone-900 border-2 border-amber-600 text-left transition-all shadow-lg cursor-pointer">
-                    <div class="w-8 h-8 rounded-full bg-amber-900 mb-3 border border-amber-700"></div>
-                    <div class="font-bold text-white text-lg">Walnut Blend</div>
-                    <div class="text-xs text-stone-400 mt-1">Deep dark grain finish with satin touch</div>
-                </button>
-                <button data-finish="birch" id="btn-birch" class="finish-btn p-5 rounded-2xl bg-stone-900 border-2 border-stone-800 text-left transition-all hover:border-stone-700 cursor-pointer">
-                    <div class="w-8 h-8 rounded-full bg-amber-200 mb-3 border border-amber-300"></div>
-                    <div class="font-bold text-white text-lg">Golden Birch</div>
-                    <div class="text-xs text-stone-400 mt-1">Light warm pine/birch wood filament tone</div>
-                </button>
-                <button data-finish="ebony" id="btn-ebony" class="finish-btn p-5 rounded-2xl bg-stone-900 border-2 border-stone-800 text-left transition-all hover:border-stone-700 cursor-pointer">
-                    <div class="w-8 h-8 rounded-full bg-stone-900 mb-3 border border-stone-700"></div>
-                    <div class="font-bold text-white text-lg">Ebony Timber</div>
-                    <div class="text-xs text-stone-400 mt-1">Darkened carbonized wood aesthetic</div>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- TECHNICAL SPECS GRID -->
-    <section id="specs" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Engineering & Print Specifications</h2>
-                <p class="mt-4 text-stone-400">Engineered with high infill density and precision layer calibration for maximum durability.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-stone-900/60 border border-stone-800/80 p-6 rounded-2xl">
-                    <div class="text-amber-500 font-bold text-sm uppercase tracking-wider mb-2">Dimensions</div>
-                    <div class="text-2xl font-extrabold text-white">95 x 62 x 12 mm</div>
-                    <p class="text-xs text-stone-400 mt-2">Slim profile fits comfortably in front or rear pockets.</p>
-                </div>
-                <div class="bg-stone-900/60 border border-stone-800/80 p-6 rounded-2xl">
-                    <div class="text-amber-500 font-bold text-sm uppercase tracking-wider mb-2">Weight</div>
-                    <div class="text-2xl font-extrabold text-white">42 Grams</div>
-                    <p class="text-xs text-stone-400 mt-2">Ultra-lightweight composite structure.</p>
-                </div>
-                <div class="bg-stone-900/60 border border-stone-800/80 p-6 rounded-2xl">
-                    <div class="text-amber-500 font-bold text-sm uppercase tracking-wider mb-2">Print Parameters</div>
-                    <div class="text-2xl font-extrabold text-white">0.16mm Layer / 40% Infill</div>
-                    <p class="text-xs text-stone-400 mt-2">Optimized rigidity with structural grid infill.</p>
-                </div>
-                <div class="bg-stone-900/60 border border-stone-800/80 p-6 rounded-2xl">
-                    <div class="text-amber-500 font-bold text-sm uppercase tracking-wider mb-2">Capacity</div>
-                    <div class="text-2xl font-extrabold text-white">1–8 Cards & Cash</div>
-                    <p class="text-xs text-stone-400 mt-2">Secure grip slot with elastic cash strap option.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PHOTO GALLERY SECTION -->
-    <section id="gallery" class="py-20 bg-stone-900/50 border-t border-stone-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Product Gallery</h2>
-                <p class="mt-4 text-stone-400">Explore all three angles: Closed face, rear view, and internal open view.</p>
-            </div>
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo">
+        <button id="close-lightbox-btn" aria-label="Close photo">✕</button>
+        <img id="lightbox-img" src="" alt="Enlarged product photo">
+    </div>
+</body>
+</html>
