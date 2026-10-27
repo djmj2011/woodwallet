@@ -1,97 +1,70 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Configuration Data
-    const finishesData = {
-        walnut: { name: "Walnut Wood Composite", price: "$39.00", image: "images/wallet.jpg" },
-        birch: { name: "Golden Birch Blend", price: "$39.00", image: "images/wallet.jpg" },
-        ebony: { name: "Ebony Timber Blend", price: "$42.00", image: "images/wallet.jpg" }
-    };
+(function () {
+  var finishes = {
+    walnut: { name: 'Walnut Blend', price: 39, filter: 'none' },
+    birch:  { name: 'Golden Birch', price: 39, filter: 'brightness(1.4) saturate(.75) sepia(.15)' },
+    ebony:  { name: 'Ebony Timber', price: 42, filter: 'brightness(.6) contrast(1.1) saturate(.5)' }
+  };
+  var angles = { closed: 'Closed', back: 'Back', open: 'Open' };
+  var state = { finish: 'walnut', angle: 'closed' };
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var money = function (n) { return '$' + n.toFixed(2); };
 
-    // Elements
-    const presetLabel = document.getElementById('preset-label');
-    const presetPrice = document.getElementById('preset-price');
-    const mainImg = document.getElementById('main-product-img');
-    const finishSelect = document.getElementById('order-finish-select');
-    const finishBtns = document.querySelectorAll('.finish-btn');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const closeLightboxBtn = document.getElementById('close-lightbox-btn');
+  var img = $('#main-product-img'), label = $('#preset-label'), priceEl = $('#preset-price');
+  var select = $('#order-finish-select'), qty = $('#quantity');
 
-    // Set Finish Function
-    function setFinish(type) {
-        const data = finishesData[type];
-        if (!data) return;
+  function render() {
+    var f = finishes[state.finish];
+    img.src = 'images/hero_' + state.angle + '.png';
+    img.style.filter = f.filter;
+    label.textContent = angles[state.angle] + ' view, ' + f.name;
+    priceEl.textContent = money(f.price);
+    $$('.angle-btn').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.angle === state.angle); });
+    $$('.finish-btn').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.finish === state.finish); });
+    $$('.gallery img').forEach(function (g) { g.style.filter = f.filter; });
+    select.value = state.finish;
+    updateTotal();
+  }
 
-        if (presetLabel) presetLabel.innerText = data.name;
-        if (presetPrice) presetPrice.innerText = data.price;
-        if (mainImg) mainImg.src = data.image;
+  function updateTotal() {
+    var f = finishes[select.value];
+    var q = Math.max(1, Math.min(10, parseInt(qty.value, 10) || 1));
+    $('#sum-item').textContent = f.name + ' × ' + q;
+    $('#sum-total').textContent = money(f.price * q);
+  }
 
-        if (finishSelect && finishSelect.value !== type) {
-            finishSelect.value = type;
-        }
+  $$('.angle-btn').forEach(function (b) {
+    b.addEventListener('click', function () { state.angle = b.dataset.angle; render(); });
+  });
+  $$('.finish-btn').forEach(function (b) {
+    b.addEventListener('click', function () { state.finish = b.dataset.finish; render(); });
+  });
+  select.addEventListener('change', function () { state.finish = select.value; render(); });
+  qty.addEventListener('input', updateTotal);
 
-        finishBtns.forEach(btn => {
-            btn.classList.remove('border-amber-600', 'bg-stone-900/80');
-            btn.classList.add('border-stone-800');
-        });
+  // Mobile menu
+  var menuBtn = $('.menu-btn'), nav = $('#site-nav');
+  menuBtn.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  $$('#site-nav a').forEach(function (a) {
+    a.addEventListener('click', function () { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); });
+  });
 
-        const activeBtn = document.getElementById(`btn-${type}`);
-        if (activeBtn) {
-            activeBtn.classList.remove('border-stone-800');
-            activeBtn.classList.add('border-amber-600', 'bg-stone-900/80');
-        }
-    }
-
-    // Attach Click Events to Finish Buttons
-    finishBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const finishType = btn.getAttribute('data-finish');
-            setFinish(finishType);
-        });
+  // Lightbox
+  var box = $('#lightbox'), boxImg = $('#lightbox-img');
+  function closeBox() { box.classList.remove('open'); }
+  $$('.shot').forEach(function (s) {
+    s.addEventListener('click', function () {
+      boxImg.src = s.dataset.img;
+      boxImg.style.filter = finishes[state.finish].filter;
+      box.classList.add('open');
     });
+  });
+  $('#close-lightbox-btn').addEventListener('click', closeBox);
+  box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeBox(); });
 
-    // Synchronize Form Select Dropdown Changes with Buttons & Hero Card
-    if (finishSelect) {
-        finishSelect.addEventListener('change', (e) => {
-            setFinish(e.target.value);
-        });
-    }
-
-    // Lightbox Logic
-    function openLightbox(imgSrc) {
-        if (lightboxImg && lightbox) {
-            lightboxImg.src = imgSrc;
-            lightbox.classList.remove('hidden');
-            lightbox.classList.add('flex');
-        }
-    }
-
-    function closeLightbox() {
-        if (lightbox) {
-            lightbox.classList.remove('flex');
-            lightbox.classList.add('hidden');
-        }
-    }
-
-    galleryItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const imgSrc = item.getAttribute('data-img');
-            openLightbox(imgSrc);
-        });
-    });
-
-    if (closeLightboxBtn) {
-        closeLightboxBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            closeLightbox();
-        });
-    }
-
-    if (lightbox) {
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-    }
-});
+  render();
+})();
