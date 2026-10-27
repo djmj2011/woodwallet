@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Makers | TimberVault 3D Printed Wood Wallets</title>
-    <meta name="description" content="Meet the makers behind TimberVault. Crafted with precision 3D printing and hand-finished wood composite filaments.">
+    <title>TimberVault | 3D Printed Wood Wallet</title>
+    <meta name="description" content="A sturdy card wallet 3D printed in wood-fiber composite. Choose walnut, golden birch or ebony. Holds 5 cards plus cash.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,9 +20,9 @@
             <a href="index.html" class="logo" aria-label="TimberVault home">Timber<span>Vault</span></a>
             <button class="menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
             <nav class="nav" id="site-nav" aria-label="Main">
-                <a href="index.html">Home</a>
+                <a href="index.html" aria-current="page">Home</a>
                 <a href="specs.html">Specs</a>
-                <a href="makers.html" aria-current="page">Makers</a>
+                <a href="makers.html">Makers</a>
                 <a href="about.html">About us</a>
                 <a href="order.html" class="btn btn-primary btn-sm">Order now</a>
             </nav>
@@ -31,49 +31,76 @@
 
     <main id="main">
         <section class="hero">
-            <div class="wrap">
-                <h1>Behind the Craft</h1>
-                <p class="lede">We blend modern additive manufacturing with organic timber fibers to rethink everyday carry essentials.</p>
-            </div>
-        </section>
-
-        <section class="section section-alt">
-            <div class="wrap">
-                <h2>Our Print Studio & Process</h2>
-                <p class="lede">Every TimberVault wallet is calibrated, printed, and inspected in our boutique studio.</p>
-                
-                <div class="quick">
-                    <div>
-                        <strong>01. High-Precision Nozzles</strong>
-                        <span>We print with hardened 0.6mm steel nozzles specially calibrated to allow dense wood fibers to flow without clogging or burning.</span>
+            <div class="wrap hero-grid">
+                <div>
+                    <h1>A slim wallet printed from real wood fiber</h1>
+                    <p class="lede">TimberVault is a sturdy card wallet 3D printed in a wood-fiber composite, with the grain and scent of timber. It slips into any pocket.</p>
+                    <div class="cta-row">
+                        <a href="order.html" class="btn btn-primary">Order for $39</a>
+                        <a href="specs.html" class="btn btn-ghost">See the specs</a>
                     </div>
-                    <div>
-                        <strong>02. Hand Calibration</strong>
-                        <span>Layer height and print temperatures are fine-tuned per batch to ensure deep natural grain patterns and zero warping.</span>
+                    <ul class="trust">
+                        <li>83.34 g</li>
+                        <li>Holds 5 cards plus cash</li>
+                        <li>Made to order</li>
+                    </ul>
+                </div>
+                <div class="stage">
+                    <div class="stage-img">
+                        <img id="main-product-img" src="images/hero_closed.png" alt="TimberVault wood composite wallet" width="800" height="600">
                     </div>
-                    <div>
-                        <strong>03. Hand Finished</strong>
-                        <span>After printing, each wallet undergo hand-sanding on key stress edges and sealed with a light organic satin finish.</span>
+                    <div class="stage-caption">
+                        <strong id="preset-label">Closed view, Walnut Blend</strong>
+                        <span id="preset-price">$39.00</span>
+                    </div>
+                    <div class="tabs" role="group" aria-label="Product view">
+                        <button class="tab angle-btn" data-angle="closed" aria-pressed="true">Closed</button>
+                        <button class="tab angle-btn" data-angle="back" aria-pressed="false">Back</button>
+                        <button class="tab angle-btn" data-angle="open" aria-pressed="false">Open</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section">
+        <section id="finishes" class="section section-alt">
             <div class="wrap">
-                <h2>Quality Guarantee</h2>
-                <p class="lede">Because we print in small batches, every wallet undergoes a 5-point inspection before shipping.</p>
-                
-                <ul class="trust" style="margin-top: 2rem;">
-                    <li>Zero-slop card retention</li>
-                    <li>Stress-tested spring tension</li>
-                    <li>Smooth chamfered edges</li>
-                    <li>Sustainably sourced bio-plastics</li>
-                </ul>
+                <h2>Choose your finish</h2>
+                <p class="lede">Each finish is printed in a PLA and wood-fiber composite. Select one and the preview above updates.</p>
+                <div class="finishes" role="group" aria-label="Wood finish">
+                    <button class="finish finish-btn" id="btn-walnut" data-finish="walnut" aria-pressed="true"><div class="swatch" style="background:#5a3a22"></div><h3>Walnut Blend</h3><p>Deep, dark grain with a satin feel.</p><span class="price">$39</span></button>
+                    <button class="finish finish-btn" id="btn-birch" data-finish="birch" aria-pressed="false"><div class="swatch" style="background:#e3c08a"></div><h3>Golden Birch</h3><p>Light, warm tone with a pale grain.</p><span class="price">$39</span></button>
+                    <button class="finish finish-btn" id="btn-ebony" data-finish="ebony" aria-pressed="false"><div class="swatch" style="background:#1f1b18"></div><h3>Ebony Timber</h3><p>Near-black, carbonized look.</p><span class="price">$42</span></button>
+                </div>
+                <div class="cta-row"><a href="order.html" class="btn btn-primary">Order your finish</a></div>
+            </div>
+        </section>
 
-                <div class="cta-row" style="margin-top: 2rem;">
-                    <a href="order.html" class="btn btn-primary">Custom order a wallet ($39)</a>
-                    <a href="specs.html" class="btn btn-ghost">View technical specs</a>
+        <section id="gallery" class="section">
+            <div class="wrap">
+                <h2>See it from every angle</h2>
+                <p class="lede">Select a photo to enlarge it.</p>
+                <div class="gallery">
+                    <button class="shot gallery-item" data-img="images/hero_closed.png"><div class="frame"><img src="images/hero_closed.png" alt="Wallet closed" loading="lazy"></div><span>Closed face and wood grain</span></button>
+                    <button class="shot gallery-item" data-img="images/hero_back.png"><div class="frame"><img src="images/hero_back.png" alt="Wallet back" loading="lazy"></div><span>Back and pocket clip</span></button>
+                    <button class="shot gallery-item" data-img="images/hero_open.png"><div class="frame"><img src="images/hero_open.png" alt="Wallet open" loading="lazy"></div><span>Open card chamber</span></button>
+                </div>
+                <div class="quick">
+                    <a href="specs.html"><strong>Specs</strong><span>Weight, material and print settings</span></a>
+                    <a href="makers.html"><strong>Makers</strong><span>Meet the designers & print lab</span></a>
+                    <a href="about.html"><strong>About us</strong><span>How each wallet is made</span></a>
+                    <a href="order.html"><strong>Order</strong><span>Pay securely with PayPal</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section section-alt">
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details><summary>Is it real wood?</summary><p>It is a composite of PLA plastic and recycled wood fiber, so it prints with the look, texture and scent of wood. It is not solid timber.</p></details>
+                    <details><summary>How do I pay?</summary><p>Checkout is through PayPal. You can pay with your PayPal balance or with a card, and PayPal collects your shipping address.</p></details>
+                    <details><summary>How long does an order take?</summary><p>Each wallet is printed to order, so there is a short lead time before it ships.</p></details>
+                    <details><summary>How many cards does it hold?</summary><p>Five cards, plus folded cash under the elastic strap.</p></details>
                 </div>
             </div>
         </section>
