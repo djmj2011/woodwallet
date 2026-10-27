@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order | TimberVault</title>
-    <meta name="description" content="Order a TimberVault wallet and pay securely with PayPal.">
+    <title>Makers | TimberVault 3D Printed Wood Wallets</title>
+    <meta name="description" content="Meet the makers behind TimberVault. Crafted with precision 3D printing and hand-finished wood composite filaments.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
-    <script src="https://www.paypal.com/sdk/js?client-id=BAAAauK_P9zezbXt2HcykKzJrGLlnKpqRdQ6Op6JPd7psv6ugqXF3AkC7Y5eG_rxlFZzj_OcoCoCHvIgro&components=hosted-buttons&disable-funding=venmo&currency=CAD"></script>
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/script.js" defer></script>
 </head>
@@ -19,47 +18,62 @@
     <header class="site-header">
         <div class="wrap bar">
             <a href="index.html" class="logo" aria-label="TimberVault home">Timber<span>Vault</span></a>
-            <button class="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
+            <button class="menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
             <nav class="nav" id="site-nav" aria-label="Main">
                 <a href="index.html">Home</a>
                 <a href="specs.html">Specs</a>
+                <a href="makers.html" aria-current="page">Makers</a>
                 <a href="about.html">About us</a>
-                <a href="order.html" class="btn btn-primary btn-sm" aria-current="page">Order now</a>
+                <a href="order.html" class="btn btn-primary btn-sm">Order now</a>
             </nav>
         </div>
     </header>
 
     <main id="main">
-        <section class="page-head">
+        <section class="hero">
             <div class="wrap">
-                <h1>Order your TimberVault</h1>
-                <p class="lede">Choose your finish and pay securely with PayPal. PayPal collects your shipping address.</p>
+                <h1>Behind the Craft</h1>
+                <p class="lede">We blend modern additive manufacturing with organic timber fibers to rethink everyday carry essentials.</p>
             </div>
         </section>
+
+        <section class="section section-alt">
+            <div class="wrap">
+                <h2>Our Print Studio & Process</h2>
+                <p class="lede">Every TimberVault wallet is calibrated, printed, and inspected in our boutique studio.</p>
+                
+                <div class="quick">
+                    <div>
+                        <strong>01. High-Precision Nozzles</strong>
+                        <span>We print with hardened 0.6mm steel nozzles specially calibrated to allow dense wood fibers to flow without clogging or burning.</span>
+                    </div>
+                    <div>
+                        <strong>02. Hand Calibration</strong>
+                        <span>Layer height and print temperatures are fine-tuned per batch to ensure deep natural grain patterns and zero warping.</span>
+                    </div>
+                    <div>
+                        <strong>03. Hand Finished</strong>
+                        <span>After printing, each wallet undergo hand-sanding on key stress edges and sealed with a light organic satin finish.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="section">
             <div class="wrap">
-                <div class="order-grid" style="margin-top:0">
-                    <div class="form">
-                        <div>
-                            <label for="order-finish-select">Finish</label>
-                            <select id="order-finish-select">
-                                <option value="walnut">Walnut Blend ($39 CAD)</option>
-                                <option value="birch">Golden Birch ($39 CAD)</option>
-                                <option value="ebony">Ebony Timber ($42 CAD)</option>
-                            </select>
-                        </div>
-                        <div id="paypal-container-KY28SCGG6YAMS" data-finish="walnut" data-btn="KY28SCGG6YAMS"></div>
-                        <div id="paypal-container-U4Y7EUQKKCDEY" data-finish="birch" data-btn="U4Y7EUQKKCDEY" hidden></div>
-                        <div id="paypal-container-LM6PZJPLTCLMA" data-finish="ebony" data-btn="LM6PZJPLTCLMA" hidden></div>
-                        <p class="pay-note" id="pp-error" hidden>The PayPal button could not load. Check your connection and refresh the page.</p>
-                        <p class="pay-note">Prices are in Canadian dollars. You will complete payment on PayPal.</p>
-                    </div>
-                    <aside class="summary" aria-live="polite">
-                        <h3>Order summary</h3>
-                        <div class="line"><span id="sum-item">Walnut Blend</span></div>
-                        <div class="line"><span>Shipping</span><span>Added at PayPal</span></div>
-                        <div class="line total"><span>Total</span><span id="sum-total">$39.00 CAD</span></div>
-                    </aside>
+                <h2>Quality Guarantee</h2>
+                <p class="lede">Because we print in small batches, every wallet undergoes a 5-point inspection before shipping.</p>
+                
+                <ul class="trust" style="margin-top: 2rem;">
+                    <li>Zero-slop card retention</li>
+                    <li>Stress-tested spring tension</li>
+                    <li>Smooth chamfered edges</li>
+                    <li>Sustainably sourced bio-plastics</li>
+                </ul>
+
+                <div class="cta-row" style="margin-top: 2rem;">
+                    <a href="order.html" class="btn btn-primary">Custom order a wallet ($39)</a>
+                    <a href="specs.html" class="btn btn-ghost">View technical specs</a>
                 </div>
             </div>
         </section>
@@ -69,10 +83,20 @@
         <div class="wrap">
             <div class="foot">
                 <div><div class="logo">Timber<span>Vault</span></div><p style="margin-top:8px">3D printed wood composite wallets.</p></div>
-                <ul><li><a href="specs.html">Specs</a></li><li><a href="about.html">About us</a></li><li><a href="order.html">Order</a></li></ul>
+                <ul>
+                    <li><a href="specs.html">Specs</a></li>
+                    <li><a href="makers.html">Makers</a></li>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="order.html">Order</a></li>
+                </ul>
             </div>
             <p class="legal">&copy; 2026 TimberVault. All rights reserved.</p>
         </div>
     </footer>
+
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo">
+        <button id="close-lightbox-btn" aria-label="Close photo">✕</button>
+        <img id="lightbox-img" src="" alt="Enlarged product photo">
+    </div>
 </body>
 </html>
