@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAAauK_P9zezbXt2HcykKzJrGLlnKpqRdQ6Op6JPd7psv6ugqXF3AkC7Y5eG_rxlFZzj_OcoCoCHvIgro&components=hosted-buttons&disable-funding=venmo&currency=CAD"></script>
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/script.js" defer></script>
 </head>
@@ -38,35 +39,26 @@
         <section class="section">
             <div class="wrap">
                 <div class="order-grid" style="margin-top:0">
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" class="form">
-                        <input type="hidden" name="cmd" value="_xclick">
-                        <!-- REPLACE with your PayPal account email -->
-                        <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL@example.com">
-                        <input type="hidden" name="currency_code" value="USD">
-                        <input type="hidden" name="no_shipping" value="2">
-                        <input type="hidden" name="no_note" value="1">
-                        <input type="hidden" name="item_name" id="pp-item" value="TimberVault wallet - Walnut Blend">
-                        <input type="hidden" name="amount" id="pp-amount" value="39.00">
-                        <input type="hidden" name="quantity" id="pp-qty" value="1">
-                        <div class="row">
-                            <div>
-                                <label for="order-finish-select">Finish</label>
-                                <select id="order-finish-select">
-                                    <option value="walnut">Walnut Blend ($39)</option>
-                                    <option value="birch">Golden Birch ($39)</option>
-                                    <option value="ebony">Ebony Timber ($42)</option>
-                                </select>
-                            </div>
-                            <div><label for="quantity">Quantity</label><input type="number" id="quantity" min="1" max="10" value="1"></div>
+                    <div class="form">
+                        <div>
+                            <label for="order-finish-select">Finish</label>
+                            <select id="order-finish-select">
+                                <option value="walnut">Walnut Blend ($39 CAD)</option>
+                                <option value="birch">Golden Birch ($39 CAD)</option>
+                                <option value="ebony">Ebony Timber ($42 CAD)</option>
+                            </select>
                         </div>
-                        <button type="submit" class="btn btn-primary pay-btn">Pay with PayPal</button>
-                        <p class="pay-note">You will be taken to PayPal to complete your payment.</p>
-                    </form>
+                        <div id="paypal-container-KY28SCGG6YAMS" data-finish="walnut" data-btn="KY28SCGG6YAMS"></div>
+                        <div id="paypal-container-U4Y7EUQKKCDEY" data-finish="birch" data-btn="U4Y7EUQKKCDEY" hidden></div>
+                        <div id="paypal-container-LM6PZJPLTCLMA" data-finish="ebony" data-btn="LM6PZJPLTCLMA" hidden></div>
+                        <p class="pay-note" id="pp-error" hidden>The PayPal button could not load. Check your connection and refresh the page.</p>
+                        <p class="pay-note">Prices are in Canadian dollars. You will complete payment on PayPal.</p>
+                    </div>
                     <aside class="summary" aria-live="polite">
                         <h3>Order summary</h3>
-                        <div class="line"><span id="sum-item">Walnut Blend × 1</span></div>
+                        <div class="line"><span id="sum-item">Walnut Blend</span></div>
                         <div class="line"><span>Shipping</span><span>Added at PayPal</span></div>
-                        <div class="line total"><span>Total</span><span id="sum-total">$39.00</span></div>
+                        <div class="line total"><span>Total</span><span id="sum-total">$39.00 CAD</span></div>
                     </aside>
                 </div>
             </div>
