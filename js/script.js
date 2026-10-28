@@ -30,18 +30,50 @@
     if (select) { select.value = state.finish; updateOrder(); }
   }
 
-  // Order page: show the PayPal button for the chosen finish
+  // Order page
   var rendered = {};
+  var payStep = $('#pay-step');
   function updateOrder() {
     var f = finishes[select.value];
     $('#sum-item').textContent = f.name;
     $('#sum-total').textContent = money(f.price) + ' CAD';
+    if (!payStep || payStep.hidden) return;
     $$('[data-btn]').forEach(function (c) { c.hidden = c.dataset.finish !== select.value; });
     var box = $('[data-finish="' + select.value + '"][data-btn]');
     if (!box || rendered[select.value]) return;
     if (!window.paypal || !window.paypal.HostedButtons) { $('#pp-error').hidden = false; return; }
     rendered[select.value] = true;
     window.paypal.HostedButtons({ hostedButtonId: box.dataset.btn }).render('#' + box.id);
+  }
+
+  var form = $('#order-form');
+  if (form) {
+    var errBox = $('#form-error');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var data = {};
+      new FormData(form).forEach(function (v, k) { data[k] = v; });
+      if (data.website) return; // spam trap
+      data.finishName = finishes[data.finish].name;
+      var endpoint = form.dataset.endpoint, btn = form.querySelector('button[type=submit]');
+      errBox.hidden = true;
+      if (!endpoint || endpoint.indexOf('YOUR_') === 0) {
+        errBox.textContent = 'The order form is not connected yet.'; errBox.hidden = false; return;
+      }
+      btn.disabled = true; btn.textContent = 'Sending...';
+      fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) { if (!r.ok) throw new Error('bad'); })
+        .then(function () {
+          $('#pay-name').textContent = data.name.split(' ')[0];
+          form.hidden = true; payStep.hidden = false;
+          updateOrder();
+          payStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        })
+        .catch(function () {
+          errBox.textContent = 'Sorry, we could not send your order. Please check your details and try again.';
+          errBox.hidden = false; btn.disabled = false; btn.textContent = 'Continue to payment';
+        });
+    });
   }
 
   $$('.angle-btn').forEach(function (b) {
