@@ -122,3 +122,38 @@ details p{color:var(--muted);margin-top:12px;max-width:62ch}
  .specs div{grid-template-columns:1fr;gap:4px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* multi-page additions */
+.nav a[aria-current=page]{color:var(--text)}
+.page-head{padding:72px 0 0}
+.prose{max-width:62ch}
+.prose p{color:var(--muted);margin-top:16px}
+.prose h2{margin-top:48px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.step{border-top:2px solid var(--accent);padding-top:16px}
+.step h3{font-size:1.1rem}
+.step p{color:var(--muted);font-size:.95rem;margin-top:6px}
+.pay-btn{width:100%}
+.pay-note{font-size:.85rem;color:var(--muted)}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.quick a{display:block;border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:var(--surface);transition:border-color .2s}
+.quick a:hover{border-color:var(--accent)}
+.quick strong{font-family:var(--font-head);font-size:1.2rem;display:block}
+.quick span{color:var(--muted);font-size:.9rem}
+@media(max-width:860px){.steps,.quick{grid-template-columns:1fr}}
+
+/* story pages */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.pledge{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--radius);padding:28px}
+.pledge h3{font-size:1.25rem}
+.pledge p{color:var(--muted);margin-top:10px}
+.makers{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+.maker{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:32px}
+.avatar{width:72px;height:72px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font:600 1.6rem var(--font-head);color:var(--accent);margin-bottom:20px}
+.maker h2,.maker h3{font-size:1.5rem}
+.maker .where{color:var(--accent-hover);font-size:.95rem;margin-top:4px}
+.maker p{color:var(--muted);margin-top:14px}
+@media(max-width:860px){.split,.makers{grid-template-columns:1fr;gap:32px}}
+
+[hidden]{display:none!important}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
