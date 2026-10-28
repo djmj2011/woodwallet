@@ -1,6 +1,9 @@
 // Cloudflare Worker: PayPal "payment completed" webhook -> Discord message.
 // Secrets to set in Cloudflare (never put these in your website files):
-//   PAYPAL_CLIENT_ID, PAYPAL_SECRET, PAYPAL_WEBHOOK_ID, DISCORD_WEBHOOK_URL
+//   PAYPAL_CLIENT_ID, PAYPAL_SECRET, PAYPAL_WEBHOOK_ID
+// PRIVATE FILE: contains your Discord webhook. Do NOT upload to GitHub or your website.
+const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1565035505052024952/mP1ZCr5J-buX1zqoRls7Rr6WBdNidLLvPPJiNvkAexqkjz6yniXbpqaGxf9p_GVEwcGz";
+
 const PP = "https://api-m.paypal.com"; // live. For testing use https://api-m.sandbox.paypal.com
 
 async function getToken(env) {
@@ -59,7 +62,7 @@ export default {
       .filter(Boolean).join(", ") || "Not provided";
 
     // 3. Send it to Discord
-    await fetch(env.DISCORD_WEBHOOK_URL, {
+    await fetch(DISCORD_WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
