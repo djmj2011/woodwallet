@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TimberVault | 3D Printed Wood Wallet</title>
-    <meta name="description" content="A sturdy card wallet 3D printed in wood-fiber composite. Choose walnut, golden birch or ebony. Holds 5 cards plus cash.">
+    <title>TimberVault | 3D Printed Wood Wallet Made by Two Autistic Entrepreneurs</title>
+    <meta name="description" content="A 3D printed wood-fiber wallet made by two autistic entrepreneurs. 20% of sales supports autism research.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,12 +18,12 @@
     <header class="site-header">
         <div class="wrap bar">
             <a href="index.html" class="logo" aria-label="TimberVault home">Timber<span>Vault</span></a>
-            <button class="menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+            <button class="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
             <nav class="nav" id="site-nav" aria-label="Main">
                 <a href="index.html" aria-current="page">Home</a>
                 <a href="specs.html">Specs</a>
-                <a href="makers.html">Makers</a>
                 <a href="about.html">About us</a>
+                <a href="makers.html">Meet the makers</a>
                 <a href="order.html" class="btn btn-primary btn-sm">Order now</a>
             </nav>
         </div>
@@ -34,13 +34,13 @@
             <div class="wrap hero-grid">
                 <div>
                     <h1>A slim wallet printed from real wood fiber</h1>
-                    <p class="lede">TimberVault is a sturdy card wallet 3D printed in a wood-fiber composite, with the grain and scent of timber. It slips into any pocket.</p>
+                    <p class="lede">Made by two autistic entrepreneurs, TimberVault wallets are 3D printed in a wood-fiber composite. Every sale helps fund our college education, and 20% goes to autism research.</p>
                     <div class="cta-row">
-                        <a href="order.html" class="btn btn-primary">Order for $39</a>
-                        <a href="specs.html" class="btn btn-ghost">See the specs</a>
+                        <a href="order.html" class="btn btn-primary">Order for $39 CAD</a>
+                        <a href="about.html" class="btn btn-ghost">Our story</a>
                     </div>
                     <ul class="trust">
-                        <li>83.34 g</li>
+                        <li>20% to autism research</li>
                         <li>Holds 5 cards plus cash</li>
                         <li>Made to order</li>
                     </ul>
@@ -67,36 +67,50 @@
                 <h2>Choose your finish</h2>
                 <p class="lede">Each finish is printed in a PLA and wood-fiber composite. Select one and the preview above updates.</p>
                 <div class="finishes" role="group" aria-label="Wood finish">
-                    <button class="finish finish-btn" id="btn-walnut" data-finish="walnut" aria-pressed="true"><div class="swatch" style="background:#5a3a22"></div><h3>Walnut Blend</h3><p>Deep, dark grain with a satin feel.</p><span class="price">$39</span></button>
-                    <button class="finish finish-btn" id="btn-birch" data-finish="birch" aria-pressed="false"><div class="swatch" style="background:#e3c08a"></div><h3>Golden Birch</h3><p>Light, warm tone with a pale grain.</p><span class="price">$39</span></button>
-                    <button class="finish finish-btn" id="btn-ebony" data-finish="ebony" aria-pressed="false"><div class="swatch" style="background:#1f1b18"></div><h3>Ebony Timber</h3><p>Near-black, carbonized look.</p><span class="price">$42</span></button>
+                    <button class="finish finish-btn" data-finish="walnut" aria-pressed="true"><div class="swatch" style="background:#5a3a22"></div><h3>Walnut Blend</h3><p>Deep, dark grain with a satin feel.</p><span class="price">$39</span></button>
+                    <button class="finish finish-btn" data-finish="birch" aria-pressed="false"><div class="swatch" style="background:#e3c08a"></div><h3>Golden Birch</h3><p>Light, warm tone with a pale grain.</p><span class="price">$39</span></button>
+                    <button class="finish finish-btn" data-finish="ebony" aria-pressed="false"><div class="swatch" style="background:#1f1b18"></div><h3>Ebony Timber</h3><p>Near-black, carbonized look.</p><span class="price">$42</span></button>
                 </div>
                 <div class="cta-row"><a href="order.html" class="btn btn-primary">Order your finish</a></div>
             </div>
         </section>
 
-        <section id="gallery" class="section">
+        <section class="section">
+            <div class="wrap split">
+                <div>
+                    <h2>Two makers with a goal</h2>
+                    <p class="lede">MJ is from South Africa and Aiden is from Canada. We started TimberVault to pay for college and to give back to autism research, and we want you to like the wallet as much as we like making it.</p>
+                    <div class="cta-row"><a href="makers.html" class="btn btn-ghost">Meet the makers</a></div>
+                </div>
+                <div class="pledge">
+                    <h3>20% goes to autism research</h3>
+                    <p>One fifth of every sale is donated to autism research. The rest helps pay for our college education.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="section section-alt">
             <div class="wrap">
                 <h2>See it from every angle</h2>
                 <p class="lede">Select a photo to enlarge it.</p>
                 <div class="gallery">
-                    <button class="shot gallery-item" data-img="images/hero_closed.png"><div class="frame"><img src="images/hero_closed.png" alt="Wallet closed" loading="lazy"></div><span>Closed face and wood grain</span></button>
-                    <button class="shot gallery-item" data-img="images/hero_back.png"><div class="frame"><img src="images/hero_back.png" alt="Wallet back" loading="lazy"></div><span>Back and pocket clip</span></button>
-                    <button class="shot gallery-item" data-img="images/hero_open.png"><div class="frame"><img src="images/hero_open.png" alt="Wallet open" loading="lazy"></div><span>Open card chamber</span></button>
+                    <button class="shot" data-img="images/hero_closed.png"><div class="frame"><img src="images/hero_closed.png" alt="Wallet closed" loading="lazy"></div><span>Closed face and wood grain</span></button>
+                    <button class="shot" data-img="images/hero_back.png"><div class="frame"><img src="images/hero_back.png" alt="Wallet back" loading="lazy"></div><span>Back and pocket clip</span></button>
+                    <button class="shot" data-img="images/hero_open.png"><div class="frame"><img src="images/hero_open.png" alt="Wallet open" loading="lazy"></div><span>Open card chamber</span></button>
                 </div>
                 <div class="quick">
                     <a href="specs.html"><strong>Specs</strong><span>Weight, material and print settings</span></a>
-                    <a href="makers.html"><strong>Makers</strong><span>Meet the designers & print lab</span></a>
-                    <a href="about.html"><strong>About us</strong><span>How each wallet is made</span></a>
+                    <a href="makers.html"><strong>Meet the makers</strong><span>The two people behind TimberVault</span></a>
                     <a href="order.html"><strong>Order</strong><span>Pay securely with PayPal</span></a>
                 </div>
             </div>
         </section>
 
-        <section id="faq" class="section section-alt">
+        <section id="faq" class="section">
             <div class="wrap">
                 <h2>Questions</h2>
                 <div class="faq">
+                    <details><summary>Where does the money go?</summary><p>20% of every sale is donated to autism research. The rest helps pay for our college education.</p></details>
                     <details><summary>Is it real wood?</summary><p>It is a composite of PLA plastic and recycled wood fiber, so it prints with the look, texture and scent of wood. It is not solid timber.</p></details>
                     <details><summary>How do I pay?</summary><p>Checkout is through PayPal. You can pay with your PayPal balance or with a card, and PayPal collects your shipping address.</p></details>
                     <details><summary>How long does an order take?</summary><p>Each wallet is printed to order, so there is a short lead time before it ships.</p></details>
@@ -109,18 +123,12 @@
     <footer class="site-footer">
         <div class="wrap">
             <div class="foot">
-                <div><div class="logo">Timber<span>Vault</span></div><p style="margin-top:8px">3D printed wood composite wallets.</p></div>
-                <ul>
-                    <li><a href="specs.html">Specs</a></li>
-                    <li><a href="makers.html">Makers</a></li>
-                    <li><a href="about.html">About us</a></li>
-                    <li><a href="order.html">Order</a></li>
-                </ul>
+                <div><div class="logo">Timber<span>Vault</span></div><p style="margin-top:8px">3D printed wood composite wallets, made by two autistic entrepreneurs.</p></div>
+                <ul><li><a href="specs.html">Specs</a></li><li><a href="about.html">About us</a></li><li><a href="makers.html">Meet the makers</a></li><li><a href="order.html">Order</a></li></ul>
             </div>
             <p class="legal">&copy; 2026 TimberVault. All rights reserved.</p>
         </div>
     </footer>
-
     <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo">
         <button id="close-lightbox-btn" aria-label="Close photo">✕</button>
         <img id="lightbox-img" src="" alt="Enlarged product photo">
