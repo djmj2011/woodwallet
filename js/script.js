@@ -54,15 +54,34 @@
       var data = {};
       new FormData(form).forEach(function (v, k) { data[k] = v; });
       if (data.website) return; // spam trap
-      data.finishName = finishes[data.finish].name;
-      var endpoint = form.dataset.endpoint, btn = form.querySelector('button[type=submit]');
+      var hook = form.dataset.webhook, btn = form.querySelector('button[type=submit]');
       errBox.hidden = true;
-      if (!endpoint || endpoint.indexOf('YOUR_') === 0) {
-        errBox.textContent = 'The order form is not connected yet.'; errBox.hidden = false; return;
+      var last = 0;
+      try { last = parseInt(sessionStorage.getItem('tv-sent') || '0', 10); } catch (x) {}
+      if (Date.now() - last < 30000) {
+        errBox.textContent = 'Please wait a few seconds before sending another order.'; errBox.hidden = false; return;
       }
+      var clip = function (s, n) { return String(s || '').trim().slice(0, n); };
+      var f = finishes[data.finish];
+      var payload = {
+        allowed_mentions: { parse: [] },
+        embeds: [{
+          title: 'New order request (not paid yet)',
+          color: 0x5865f2,
+          fields: [
+            { name: 'Finish', value: f.name + ' ($' + f.price + ' CAD)' },
+            { name: 'Name', value: clip(data.name, 100) || '-', inline: true },
+            { name: 'Email', value: clip(data.email, 150) || '-', inline: true },
+            { name: 'Ship to', value: [data.street, data.city, data.region, data.postal, data.country].map(function (v) { return clip(v, 150); }).filter(Boolean).join(', ') },
+            { name: 'Notes', value: clip(data.notes, 500) || 'None' }
+          ],
+          timestamp: new Date().toISOString()
+        }]
+      };
       btn.disabled = true; btn.textContent = 'Sending...';
-      fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      fetch(hook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
         .then(function (r) { if (!r.ok) throw new Error('bad'); })
+        .then(function () { try { sessionStorage.setItem('tv-sent', String(Date.now())); } catch (x) {} })
         .then(function () {
           $('#pay-name').textContent = data.name.split(' ')[0];
           form.hidden = true; payStep.hidden = false;
