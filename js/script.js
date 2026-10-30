@@ -11,6 +11,16 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var money = function (n) { return '$' + n.toFixed(2); };
+  var meta = function (n) { var m = $('meta[name="' + n + '"]'); return m ? m.content : ''; };
+  var isSet = function (v) { return v && v.indexOf('YOUR_') !== 0; };
+
+  var API = meta('order-api');
+  function api(payload) {
+    if (!isSet(API)) return Promise.reject(new Error('not connected'));
+    return fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json(); });
+  }
+  function show(el, text) { el.textContent = text; el.hidden = false; }
 
   var img = $('#main-product-img'), label = $('#preset-label'), priceEl = $('#preset-price');
   var select = $('#order-finish-select');
@@ -27,72 +37,13 @@
     $$('.angle-btn').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.angle === state.angle); });
     $$('.finish-btn').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.finish === state.finish); });
     $$('.gallery img').forEach(function (g) { g.style.filter = f.filter; });
-    if (select) { select.value = state.finish; updateOrder(); }
+    if (select) { select.value = state.finish; updateSummary(); }
   }
 
-  // Order page
-  var rendered = {};
-  var payStep = $('#pay-step');
-  function updateOrder() {
+  function updateSummary() {
     var f = finishes[select.value];
     $('#sum-item').textContent = f.name;
     $('#sum-total').textContent = money(f.price) + ' CAD';
-    if (!payStep || payStep.hidden) return;
-    $$('[data-btn]').forEach(function (c) { c.hidden = c.dataset.finish !== select.value; });
-    var box = $('[data-finish="' + select.value + '"][data-btn]');
-    if (!box || rendered[select.value]) return;
-    if (!window.paypal || !window.paypal.HostedButtons) { $('#pp-error').hidden = false; return; }
-    rendered[select.value] = true;
-    window.paypal.HostedButtons({ hostedButtonId: box.dataset.btn }).render('#' + box.id);
-  }
-
-  var form = $('#order-form');
-  if (form) {
-    var errBox = $('#form-error');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var data = {};
-      new FormData(form).forEach(function (v, k) { data[k] = v; });
-      if (data.website) return; // spam trap
-      var hook = form.dataset.webhook, btn = form.querySelector('button[type=submit]');
-      errBox.hidden = true;
-      var last = 0;
-      try { last = parseInt(sessionStorage.getItem('tv-sent') || '0', 10); } catch (x) {}
-      if (Date.now() - last < 30000) {
-        errBox.textContent = 'Please wait a few seconds before sending another order.'; errBox.hidden = false; return;
-      }
-      var clip = function (s, n) { return String(s || '').trim().slice(0, n); };
-      var f = finishes[data.finish];
-      var payload = {
-        allowed_mentions: { parse: [] },
-        embeds: [{
-          title: 'New order request (not paid yet)',
-          color: 0x5865f2,
-          fields: [
-            { name: 'Finish', value: f.name + ' ($' + f.price + ' CAD)' },
-            { name: 'Name', value: clip(data.name, 100) || '-', inline: true },
-            { name: 'Email', value: clip(data.email, 150) || '-', inline: true },
-            { name: 'Ship to', value: [data.street, data.city, data.region, data.postal, data.country].map(function (v) { return clip(v, 150); }).filter(Boolean).join(', ') },
-            { name: 'Notes', value: clip(data.notes, 500) || 'None' }
-          ],
-          timestamp: new Date().toISOString()
-        }]
-      };
-      btn.disabled = true; btn.textContent = 'Sending...';
-      fetch(hook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
-        .then(function (r) { if (!r.ok) throw new Error('bad'); })
-        .then(function () { try { sessionStorage.setItem('tv-sent', String(Date.now())); } catch (x) {} })
-        .then(function () {
-          $('#pay-name').textContent = data.name.split(' ')[0];
-          form.hidden = true; payStep.hidden = false;
-          updateOrder();
-          payStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        })
-        .catch(function () {
-          errBox.textContent = 'Sorry, we could not send your order. Please check your details and try again.';
-          errBox.hidden = false; btn.disabled = false; btn.textContent = 'Continue to payment';
-        });
-    });
   }
 
   $$('.angle-btn').forEach(function (b) {
@@ -103,7 +54,132 @@
   });
   if (select) select.addEventListener('change', function () { state.finish = select.value; render(); });
 
-  // Mobile menu
+  // ---------- Order page ----------
+  var form = $('#order-form');
+  if (form) {
+    var payStep = $('#pay-step'), doneStep = $('#done-step'), errBox = $('#form-error'), ppErr = $('#pp-error');
+    var adminBox = $('#admin-box');
+    if (location.hash === '#admin') adminBox.hidden = false;
+
+    var collect = function () {
+      var d = {};
+      new FormData(form).forEach(function (v, k) { d[k] = v; });
+      return d;
+    };
+
+    var showDone = function (code) {
+      form.hidden = true; payStep.hidden = true; doneStep.hidden = false;
+      $('#order-code').textContent = code;
+      doneStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    // Send the order to our server, which checks the payment with PayPal
+    var record = function (extra) {
+      var d = collect();
+      if (d.website) return Promise.resolve();
+      var payload = Object.assign({ action: 'order' }, d, extra);
+      return api(payload).then(function (res) {
+        if (res.ok) { showDone(res.code); return; }
+        var msg = res.error || 'Something went wrong.';
+        if (extra.paypalOrderId) msg += ' If you were charged, please contact us and give this PayPal reference: ' + extra.paypalOrderId;
+        show(extra.admin ? errBox : ppErr, msg);
+      }).catch(function () {
+        var msg = isSet(API) ? 'We could not reach our order system.' : 'The order system is not connected yet.';
+        if (extra.paypalOrderId) msg += ' If you were charged, please contact us and give this PayPal reference: ' + extra.paypalOrderId;
+        show(extra.admin ? errBox : ppErr, msg);
+      });
+    };
+
+    var loadPayPal = function () {
+      var client = meta('paypal-client-id');
+      return new Promise(function (resolve, reject) {
+        if (window.paypal && window.paypal.Buttons) return resolve();
+        if (!isSet(client)) return reject(new Error('no client'));
+        var s = document.createElement('script');
+        s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(client) + '&currency=CAD&components=buttons&disable-funding=venmo';
+        s.onload = resolve; s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    };
+
+    var renderButtons = function () {
+      var holder = $('#paypal-buttons'), f = finishes[select.value];
+      holder.innerHTML = '';
+      window.paypal.Buttons({
+        createOrder: function (_d, actions) {
+          return actions.order.create({
+            intent: 'CAPTURE',
+            purchase_units: [{ description: 'Wood Wallet - ' + f.name, amount: { currency_code: 'CAD', value: f.price.toFixed(2) } }]
+          });
+        },
+        onApprove: function (data, actions) {
+          return actions.order.capture().then(function () { return record({ paypalOrderId: data.orderID }); });
+        },
+        onError: function () { show(ppErr, 'Something went wrong with PayPal. Please try again.'); }
+      }).render('#paypal-buttons');
+    };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var d = collect();
+      if (d.website) return;
+      errBox.hidden = true; ppErr.hidden = true;
+      $('#pay-name').textContent = d.name.split(' ')[0];
+      form.hidden = true; payStep.hidden = false;
+      loadPayPal().then(renderButtons).catch(function () {
+        show(ppErr, 'PayPal is not available right now. Please try again later.');
+      });
+      payStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    $('#back-btn').addEventListener('click', function () {
+      payStep.hidden = true; form.hidden = false; $('#paypal-buttons').innerHTML = '';
+    });
+
+    $('#admin-btn').addEventListener('click', function () {
+      errBox.hidden = true;
+      if (!form.reportValidity()) return;
+      record({ admin: $('#admin-pass').value });
+    });
+  }
+
+  // ---------- Reviews page ----------
+  var rform = $('#review-form');
+  if (rform) {
+    var rmsg = $('#review-msg'), list = $('#reviews-list');
+    if (isSet(API)) {
+      fetch(API + '?action=reviews').then(function (r) { return r.json(); }).then(function (res) {
+        if (!res.ok || !res.reviews.length) return;
+        list.innerHTML = '';
+        res.reviews.forEach(function (rv) {
+          var box = document.createElement('div'); box.className = 'review';
+          var top = document.createElement('div');
+          var stars = document.createElement('span'); stars.className = 'stars';
+          var n = Math.max(1, Math.min(5, parseInt(rv.rating, 10) || 5));
+          stars.textContent = '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
+          var nm = document.createElement('strong'); nm.textContent = rv.name;
+          top.appendChild(stars); top.appendChild(nm);
+          var p = document.createElement('p'); p.textContent = rv.text;
+          box.appendChild(top); box.appendChild(p); list.appendChild(box);
+        });
+      }).catch(function () {});
+    }
+    rform.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var d = {}; new FormData(rform).forEach(function (v, k) { d[k] = v; });
+      if (d.website) return;
+      rmsg.hidden = true;
+      var btn = rform.querySelector('button[type=submit]'); btn.disabled = true;
+      api(Object.assign({ action: 'review' }, d)).then(function (res) {
+        if (res.ok) { rform.reset(); show(rmsg, 'Thank you! Your review was sent and will appear after we approve it.'); }
+        else show(rmsg, res.error || 'Something went wrong.');
+      }).catch(function () {
+        show(rmsg, isSet(API) ? 'We could not send your review. Please try again.' : 'Reviews are not connected yet.');
+      }).then(function () { btn.disabled = false; });
+    });
+  }
+
+  // ---------- Mobile menu ----------
   var menuBtn = $('.menu-btn'), nav = $('#site-nav');
   if (menuBtn) {
     menuBtn.addEventListener('click', function () {
@@ -112,7 +188,7 @@
     });
   }
 
-  // Lightbox
+  // ---------- Lightbox ----------
   var box = $('#lightbox');
   if (box) {
     var boxImg = $('#lightbox-img');
