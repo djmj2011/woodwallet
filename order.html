@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order | Wood Wallet</title>
     <meta name="description" content="Order a Wood Wallet and pay securely with PayPal.">
+    <meta name="order-api" content="https://script.google.com/macros/s/AKfycby91aIGu6M8iZfG_qV8NjTuDLsLtcrN6aPWE_earIJ-TUtvxzz-Tsk9pmHvlBy7xdPO/exec">
+    <meta name="paypal-client-id" content="BAAWrQnf0AmOsB1tAvzoBkzUjkJcVGoh5AIVwf3Nso83PMjw8DXeIZhZvuRpRw9327vs7f7A5OEmz2z0hU">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
-    <script src="https://www.paypal.com/sdk/js?client-id=BAAAauK_P9zezbXt2HcykKzJrGLlnKpqRdQ6Op6JPd7psv6ugqXF3AkC7Y5eG_rxlFZzj_OcoCoCHvIgro&components=hosted-buttons&disable-funding=venmo&currency=CAD"></script>
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/script.js" defer></script>
 </head>
@@ -25,6 +26,7 @@
                 <a href="specs.html">Specs</a>
                 <a href="about.html">About us</a>
                 <a href="makers.html">Meet the makers</a>
+                <a href="reviews.html">Reviews</a>
                 <a href="order.html" class="btn btn-primary btn-sm" aria-current="page">Order now</a>
             </nav>
         </div>
@@ -34,14 +36,14 @@
         <section class="page-head">
             <div class="wrap">
                 <h1>Order your Wood Wallet</h1>
-                <p class="lede">Fill in your details, then pay securely with PayPal.</p>
+                <p class="lede">Fill in your details, then pay securely with PayPal. You get an order ID as soon as your payment is confirmed.</p>
             </div>
         </section>
         <section class="section">
             <div class="wrap">
                 <div class="order-grid" style="margin-top:0">
                     <div>
-                        <form id="order-form" class="form" data-webhook="https://discord.com/api/webhooks/1565035505052024952/mP1ZCr5J-buX1zqoRls7Rr6WBdNidLLvPPJiNvkAexqkjz6yniXbpqaGxf9p_GVEwcGz">
+                        <form id="order-form" class="form">
                             <div class="row">
                                 <div><label for="name">Full name</label><input type="text" id="name" name="name" autocomplete="name" required maxlength="100"></div>
                                 <div><label for="email">Email address</label><input type="email" id="email" name="email" autocomplete="email" required maxlength="150"></div>
@@ -65,24 +67,36 @@
                             </div>
                             <div><label for="notes">Notes (optional)</label><textarea id="notes" name="notes" rows="3" maxlength="500"></textarea></div>
                             <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-                            <p class="pay-note" id="form-error" role="alert" hidden></p>
+                            <div id="admin-box" class="pledge" hidden>
+                                <h3>Admin test</h3>
+                                <p>Places an order without paying. For testing only.</p>
+                                <label for="admin-pass" style="margin-top:14px">Admin password</label>
+                                <input type="password" id="admin-pass" autocomplete="off">
+                                <button type="button" id="admin-btn" class="btn btn-ghost btn-sm" style="margin-top:12px">Place test order</button>
+                            </div>
+                            <p class="msg" id="form-error" role="alert" hidden></p>
                             <button type="submit" class="btn btn-primary pay-btn">Continue to payment</button>
                             <p class="pay-note">We only use your details to fill your order. Prices are in Canadian dollars.</p>
                         </form>
 
                         <div id="pay-step" class="form" hidden>
                             <h2 style="font-size:1.6rem">Thanks, <span id="pay-name"></span>. One last step.</h2>
-                            <p class="pay-note">We have your details. Pay with PayPal to finish your order.</p>
-                            <div id="paypal-container-KY28SCGG6YAMS" data-finish="walnut" data-btn="KY28SCGG6YAMS"></div>
-                            <div id="paypal-container-U4Y7EUQKKCDEY" data-finish="birch" data-btn="U4Y7EUQKKCDEY" hidden></div>
-                            <div id="paypal-container-LM6PZJPLTCLMA" data-finish="ebony" data-btn="LM6PZJPLTCLMA" hidden></div>
-                            <p class="pay-note" id="pp-error" hidden>The PayPal button could not load. Check your connection and refresh the page.</p>
+                            <p class="pay-note">Pay with PayPal to place your order.</p>
+                            <div id="paypal-buttons"></div>
+                            <p class="msg" id="pp-error" role="alert" hidden></p>
+                            <div><button type="button" class="btn btn-ghost btn-sm" id="back-btn">Change my details</button></div>
+                        </div>
+
+                        <div id="done-step" class="form" hidden>
+                            <h2 style="font-size:1.6rem">Thank you for your order!</h2>
+                            <div class="code-box" id="order-code"></div>
+                            <p>Keep this order ID. You can use it once to leave a review. We also try to email it to you, so check your spam folder.</p>
+                            <div><a href="reviews.html" class="btn btn-ghost">Leave a review</a></div>
                         </div>
                     </div>
                     <aside class="summary" aria-live="polite">
                         <h3>Order summary</h3>
                         <div class="line"><span id="sum-item">Walnut Blend</span></div>
-                        <div class="line"><span>Shipping</span><span>Added at PayPal</span></div>
                         <div class="line total"><span>Total</span><span id="sum-total">$39.00 CAD</span></div>
                     </aside>
                 </div>
@@ -94,7 +108,7 @@
         <div class="wrap">
             <div class="foot">
                 <div><div class="logo">Wood <span>Wallet</span></div><p style="margin-top:8px">3D printed wood composite wallets, made by two autistic entrepreneurs.</p></div>
-                <ul><li><a href="specs.html">Specs</a></li><li><a href="about.html">About us</a></li><li><a href="makers.html">Meet the makers</a></li><li><a href="order.html">Order</a></li></ul>
+                <ul><li><a href="specs.html">Specs</a></li><li><a href="about.html">About us</a></li><li><a href="makers.html">Meet the makers</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="order.html">Order</a></li></ul>
             </div>
             <p class="legal">&copy; 2026 Wood Wallet. All rights reserved.</p>
         </div>
