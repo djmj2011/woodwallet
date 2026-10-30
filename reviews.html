@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews | Wood Wallet</title>
+    <meta name="description" content="Read and leave reviews for the Wood Wallet. Each order ID can be used once.">
+    <meta name="order-api" content="YOUR_APPS_SCRIPT_URL">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap bar">
+            <a href="index.html" class="logo" aria-label="Wood Wallet home">Wood <span>Wallet</span></a>
+            <button class="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
+            <nav class="nav" id="site-nav" aria-label="Main">
+                <a href="index.html">Home</a>
+                <a href="specs.html">Specs</a>
+                <a href="about.html">About us</a>
+                <a href="makers.html">Meet the makers</a>
+                <a href="reviews.html" aria-current="page">Reviews</a>
+                <a href="order.html" class="btn btn-primary btn-sm">Order now</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="page-head">
+            <div class="wrap">
+                <h1>Reviews</h1>
+                <p class="lede">Bought a Wood Wallet? Use the order ID you received to leave a review. Each order ID works once.</p>
+            </div>
+        </section>
+        <section class="section">
+            <div class="wrap split">
+                <div>
+                    <form id="review-form" class="form">
+                        <div><label for="code">Order ID</label><input type="text" id="code" name="code" placeholder="WW-XXXXXXXX" required maxlength="20" autocomplete="off"></div>
+                        <div class="row">
+                            <div><label for="rname">Your name</label><input type="text" id="rname" name="name" required maxlength="60"></div>
+                            <div><label for="rating">Rating</label>
+                                <select id="rating" name="rating"><option value="5">5 stars</option><option value="4">4 stars</option><option value="3">3 stars</option><option value="2">2 stars</option><option value="1">1 star</option></select></div>
+                        </div>
+                        <div><label for="text">Your review</label><textarea id="text" name="text" rows="5" required maxlength="600"></textarea></div>
+                        <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+                        <p class="msg" id="review-msg" role="alert" hidden></p>
+                        <button type="submit" class="btn btn-primary">Submit review</button>
+                        <p class="pay-note">Reviews appear on this page after we approve them.</p>
+                    </form>
+                </div>
+                <div>
+                    <h2 style="font-size:1.6rem">What customers say</h2>
+                    <div id="reviews-list"><p class="pay-note" style="margin-top:16px">No reviews yet.</p></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="foot">
+                <div><div class="logo">Wood <span>Wallet</span></div><p style="margin-top:8px">3D printed wood composite wallets, made by two autistic entrepreneurs.</p></div>
+                <ul><li><a href="specs.html">Specs</a></li><li><a href="about.html">About us</a></li><li><a href="makers.html">Meet the makers</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="order.html">Order</a></li></ul>
+            </div>
+            <p class="legal">&copy; 2026 Wood Wallet. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
